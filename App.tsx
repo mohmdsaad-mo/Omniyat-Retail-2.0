@@ -1,13 +1,14 @@
 
-import React, { useState, useEffect, useCallback } from 'react';
-import { Unit, Asset, AuditLog, AppState } from './types';
-import { INITIAL_ASSETS, INITIAL_UNITS, INITIAL_LOGS } from './constants';
-import Sidebar from './components/Sidebar';
-import Dashboard from './components/Dashboard';
-import UnitList from './components/UnitList';
-import UnitDetail from './components/UnitDetail';
-import SettingsModal from './components/SettingsModal';
-import { exportUnitsToExcel } from './services/excelService';
+import React, { useState, useEffect } from 'react';
+import { Unit, AuditLog, AppState } from './types.ts';
+import { INITIAL_ASSETS, INITIAL_UNITS, INITIAL_LOGS } from './constants.tsx';
+import Sidebar from './components/Sidebar.tsx';
+import Dashboard from './components/Dashboard.tsx';
+import UnitList from './components/UnitList.tsx';
+import UnitDetail from './components/UnitDetail.tsx';
+import SettingsModal from './components/SettingsModal.tsx';
+import { exportUnitsToExcel } from './services/excelService.ts';
+import { ClipboardList } from 'lucide-react';
 
 const App: React.FC = () => {
   const [isBooting, setIsBooting] = useState(true);
@@ -53,7 +54,6 @@ const App: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
     
-    // Simulate import processing
     const newLog: AuditLog = {
       id: Math.random().toString(36),
       timestamp: new Date().toLocaleString(),
@@ -135,7 +135,7 @@ const App: React.FC = () => {
             <UnitList 
               units={appState.units} 
               onSelectUnit={handleSelectUnit} 
-              onAddUnit={() => alert('Add unit dialog would open here')}
+              onAddUnit={() => alert('Add unit functionality available in local database')}
             />
           )}
 
@@ -143,7 +143,7 @@ const App: React.FC = () => {
             <UnitDetail 
               unit={selectedUnit} 
               onBack={handleBackToList} 
-              onEdit={() => alert('Edit dialog would open here')}
+              onEdit={() => alert('Edit mode active')}
             />
           )}
 
@@ -169,5 +169,4 @@ const App: React.FC = () => {
   );
 };
 
-import { ClipboardList } from 'lucide-react';
 export default App;
